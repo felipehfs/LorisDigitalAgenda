@@ -56,9 +56,11 @@ function SignIn(props) {
     e.preventDefault();
     apiWrapper
       .login({ email, password })
-      .then(resp => resp.data)
       .then(data => {
         console.log(data);
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('authToken', data.token)
+        props.history.push("/dashboard")
       })
       .catch(err => setError("Email ou senha incorretos!"));
   };

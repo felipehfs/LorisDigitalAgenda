@@ -24,19 +24,28 @@ const styles = {
   }
 };
 
+function displayAvatar(defaultName) {
+  if(localStorage.getItem('username')) {
+    return <Avatar>{localStorage.getItem("username")[0].toUpperCase()}</Avatar>
+  }
+  return <Avatar>{defaultName}</Avatar>
+}
+
 const JournalCard = props => {
+  const createdAt = new Date(Date.parse(props.createdAt))
+
   return  (
     <Card className={props.classes.card}>
       <CardHeader
-        avatar={<Avatar>R</Avatar>}
-        title={`Dia ${props.createdAt.getDate().toString()}`} 
+        avatar={displayAvatar()}
+        title={`Dia ${createdAt.getDate().toString()}`} 
         subheader={Intl.DateTimeFormat("pt-BR", {
           weekday: "long",
           month: "long",
           year: "numeric"
-        }).format(props.createdAt)}
+        }).format(createdAt)}
         action={
-         <ActionMenu />
+         <ActionMenu id={props._id} />
         }
       />
       <CardContent>
@@ -48,7 +57,10 @@ const JournalCard = props => {
 }
 
 JournalCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  description: PropTypes.string.isRequired,
+  createdAt: PropTypes.any,
+  stickers: PropTypes.array
 };
 
 export default withStyles(styles)(JournalCard);

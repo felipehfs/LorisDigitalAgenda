@@ -178,7 +178,10 @@ class MiniDrawer extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={e => {
+              localStorage.clear()
+              window.location = "/login"
+            }}>
               <ListItemIcon>
                 <PowerSettingsIcon />
               </ListItemIcon>
@@ -200,4 +203,4 @@ MiniDrawer.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(MiniDrawer);
+ export default withStyles(styles, { withTheme: true })(MiniDrawer);

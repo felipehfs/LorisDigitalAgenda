@@ -4,8 +4,11 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import EditIcon from '@material-ui/icons/Edit'
+import { archieveJournal } from '../../actions/journals'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default props => {
+const ActionMenu = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   return (
     <div>
@@ -23,7 +26,10 @@ export default props => {
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => setAnchorEl(null)}>
+        <MenuItem onClick={() => {
+          props.archieveJournal(props.id)
+          setAnchorEl(null)
+        }}>
           <ListItemIcon>
             <ArchiveIcon />
           </ListItemIcon>
@@ -45,3 +51,6 @@ export default props => {
     </div>
   );
 };
+
+const mapDispatchToProps = dispatch => bindActionCreators({ archieveJournal}, dispatch)
+export default connect(null, mapDispatchToProps)(ActionMenu)

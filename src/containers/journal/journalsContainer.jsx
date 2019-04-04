@@ -1,11 +1,40 @@
-import React from 'react'
-import { Grow} from '@material-ui/core'
-import JournalCard from '../../components/journal/journalCard'
+import React from "react";
+import { Grow } from "@material-ui/core";
+import PropTypes from "prop-types";
+import JournalCard from "../../components/journal/journalCard";
+import { fetchJournals } from "../../actions/journals";
 
-export default props => (
-    <div style={{ overflowY: 'auto', height: '500px', padding: 5}}>
-        {
-            props.journals.map(el => <Grow style={{ transformOrigin: '0 0 0' }} key={el.id}><JournalCard {...el} /></Grow>)
-        }
+import { connect } from "react-redux";
+
+const journalsContainer = props => {
+  React.useEffect(() => {
+      props.fetchJournals()
+  }, [])
+  console.log('journals', typeof props.journals)
+  return (
+    <div style={{ padding: 5 }}>
+      {props.journals.map(el => (
+        <Grow style={{ transformOrigin: "0 0 0" }} key={el._id}>
+          <JournalCard {...el} />
+        </Grow>
+      ))}
     </div>
-)
+  );
+};
+
+journalsContainer.propTypes = {
+  journals: PropTypes.array.isRequired
+};
+
+const mapStateToProps = state => ({
+  journals: state.journals
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchJournals: () => dispatch(fetchJournals())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(journalsContainer);
