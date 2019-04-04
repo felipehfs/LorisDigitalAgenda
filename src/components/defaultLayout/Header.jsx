@@ -22,6 +22,8 @@ import AddIcon from "@material-ui/icons/Add";
 import PersonIcon from "@material-ui/icons/Person";
 import PowerSettingsIcon from '@material-ui/icons/PowerSettingsNew'
 import ClassIcon from '@material-ui/icons/Class'
+import HomeIcon from '@material-ui/icons/Home'
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -152,6 +154,12 @@ class MiniDrawer extends React.Component {
           </div>
           <Divider />
           <List>
+          <ListItem component={RouterLink} button to="/dashboard">
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Página inicial" /> 
+            </ListItem>
             <ListItem button>
               <ListItemIcon>
                 <AddIcon />
