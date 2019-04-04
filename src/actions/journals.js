@@ -1,4 +1,8 @@
-import { readAllJournals, archiveJournal, onlyArchiveJournals } from "../helpers/api";
+import { readAllJournals, 
+  archiveJournal, 
+  onlyArchiveJournals,
+  newJournal 
+} from "../helpers/api";
 import { SET_JOURNALS } from "./types";
 
 export const setJournals = dispatch => ({
@@ -25,5 +29,11 @@ export const archieveJournal = (id, filed) => dispatch => {
 export const fetchArchivedJournals = () => dispatch => {
   onlyArchiveJournals()
     .then(resp => dispatch(setJournals(resp)))
+    .catch(err => console.error(err))
+}
+
+export const createJournals = (journals) => dispatch => {
+  newJournal(journals)
+    .then(resp => console.log("Journal created"))
     .catch(err => console.error(err))
 }

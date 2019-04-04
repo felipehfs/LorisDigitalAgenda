@@ -160,7 +160,7 @@ class MiniDrawer extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Página inicial" /> 
             </ListItem>
-            <ListItem button>
+            <ListItem component={RouterLink} button to="/pages/new">
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
@@ -172,7 +172,7 @@ class MiniDrawer extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Pesquisa avançada" />
             </ListItem>
-            <ListItem component={RouterLink} button to="/archived">
+            <ListItem component={RouterLink} button to="/pages/archived">
               <ListItemIcon>
                 <ClassIcon />
               </ListItemIcon>

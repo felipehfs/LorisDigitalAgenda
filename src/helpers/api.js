@@ -42,8 +42,12 @@ export const removeJournal = async function(id) {
   return result.data
 }
 
-// TODO: returns only the journals archived
 export const onlyArchiveJournals = async function() {
   const result = await axios.get(`${uri}/journals/archived`)
   return result.data
-} 
+}
+
+export const newJournal = async function(journal) {
+  const result = await axios.post(`${uri}/journals`, journal)
+  return result.data
+}

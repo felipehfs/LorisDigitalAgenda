@@ -4,6 +4,7 @@ import LoginPage from '../pages/login'
 import ArchivedPage from '../pages/archived'
 import DashBoardPage from '../pages/dashboard'
 import RegisterPage from '../pages/register'
+import NewJournal from '../pages/newJournal'
 
 const PrivateRoute =  ({component:Component, ...rest }) => {
     return (
@@ -21,7 +22,8 @@ export default props => (
         <Route exact path="/login" component={LoginPage} />
         <PrivateRoute path="/register" component={RegisterPage} />
         <PrivateRoute path="/dashboard" component={DashBoardPage} />
-        <PrivateRoute path="/archived" component={ArchivedPage} />
+        <PrivateRoute path="/pages/archived" component={ArchivedPage} />
+        <PrivateRoute path="/pages/new" component={NewJournal} />
         <Redirect from="*" to="/login" />
     </Switch>
 )
