@@ -1,7 +1,8 @@
 import { readAllJournals, 
   archiveJournal, 
   onlyArchiveJournals,
-  newJournal 
+  newJournal,
+  removeJournal as dropJournal
 } from "../helpers/api";
 import { SET_JOURNALS } from "./types";
 
@@ -25,6 +26,11 @@ export const archieveJournal = (id, filed) => dispatch => {
     })
     .catch(e => console.error(e));
 };
+
+export const removeJournal =  id => dispatch => {
+  dropJournal(id)
+    .catch(err => console.error(err))
+}
 
 export const fetchArchivedJournals = () => dispatch => {
   onlyArchiveJournals()

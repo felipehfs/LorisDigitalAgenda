@@ -4,7 +4,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DeleteIcon from '@material-ui/icons/Delete'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import EditIcon from '@material-ui/icons/Edit'
-import { archieveJournal } from '../../actions/journals'
+import { archieveJournal, removeJournal } from '../../actions/journals'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -41,7 +41,10 @@ const ActionMenu = props => {
           </ListItemIcon>
           <ListItemText primary="Editar" inset />
         </MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)}>
+        <MenuItem onClick={() => {
+          props.removeJournal(props.id)
+          setAnchorEl(null)
+          }}>
           <ListItemIcon>
             <DeleteIcon />
           </ListItemIcon>
@@ -52,5 +55,5 @@ const ActionMenu = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ archieveJournal}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ archieveJournal, removeJournal}, dispatch)
 export default connect(null, mapDispatchToProps)(ActionMenu)
