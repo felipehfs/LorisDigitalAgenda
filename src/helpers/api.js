@@ -4,7 +4,7 @@ const uri = "http://localhost:8000/api";
 export const login = function({ email, password }) {
   return new Promise((resolve, reject) => {
     if (!email || !password) {
-        reject("Campos email e senha são requerido!");
+        reject("Campos email e senha são requeridos!");
         return
       }
       axios.post(`${uri}/login`, {email, password}).then(resp => {
@@ -13,6 +13,18 @@ export const login = function({ email, password }) {
       }).catch(err => reject(err))
   });
 };
+
+export const register = function({ email, username, password }) {
+  return new Promise((resolve, reject) => {
+    if(!email || !username || !password){
+      reject("Campos email, username, password são requeridos!")
+      return
+    }
+    axios.post(`${uri}/register`, {email, username, password}).then(resp => {
+      resolve(resp)
+    }).catch(err => reject(err))
+  })
+}
 
 export const readAllJournals = async function() {
   const journals = await axios.get(`${uri}/journals`)

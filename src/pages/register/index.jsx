@@ -10,9 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-import * as apiWrapper from "../../helpers/api";
-import { Grid } from "@material-ui/core";
-import { Link as RouterLink } from 'react-router-dom'
+import { register } from '../../helpers/api'
 
 const styles = theme => ({
   main: {
@@ -49,23 +47,17 @@ const styles = theme => ({
 
 function SignIn(props) {
   const { classes } = props;
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  const [errors, setErrors] = useState(null);
   const handleSubmit = e => {
-    e.preventDefault();
-    apiWrapper
-      .login({ email, password })
-      .then(data => {
-        console.log(data);
-        localStorage.setItem('username', data.username)
-        localStorage.setItem('authToken', data.token)
-        props.history.push("/dashboard")
-      })
-      .catch(err => setError("Email ou senha incorretos!"));
-  };
-
+      e.preventDefault()
+      register({username, email, password})
+      .then(() => props.history.push("/login"))
+      .catch(err => setErrors(err.toString()))
+  }
   return (
     <main className={classes.main}>
       <CssBaseline />
@@ -74,20 +66,26 @@ function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Registrar
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <InputLabel htmlFor="username">Username</InputLabel>
             <Input
-              id="email"
-              name="email"
-              autoComplete="email"
-              value={email}
-              type="email"
-              onChange={e => setEmail(e.target.value)}
+              id="username"
+              name="username"
+              autoComplete="username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
               autoFocus
             />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <Input id="email" name="email" type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+            autoComplete="email" />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -100,30 +98,20 @@ function SignIn(props) {
               autoComplete="current-password"
             />
           </FormControl>
-          {error && (
+          {errors && (
             <Typography variant="body2" color="primary">
-              Senha ou email está incorreto!
+              {errors}
             </Typography>
           )}
-          <Grid container alignItems="center" alignContent="center" spacing={8}>
-          <Grid item xs>
-            <Button type="button" component={RouterLink} to="/register"
-            color="secondary" fullWidth variant="contained" className={classes.submit}>
-                Registrar
-            </Button>
-            </Grid>
-            <Grid item xs>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                className={classes.submit}
-              >
-                Entrar
-              </Button>
-            </Grid>
-          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Registrar
+          </Button>
         </form>
       </Paper>
     </main>
