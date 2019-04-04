@@ -14,6 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
+import { Link as RouterLink } from 'react-router-dom'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
@@ -163,7 +164,7 @@ class MiniDrawer extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Pesquisa avançada" />
             </ListItem>
-            <ListItem button>
+            <ListItem component={RouterLink} button to="/archived">
               <ListItemIcon>
                 <ClassIcon />
               </ListItemIcon>

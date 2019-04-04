@@ -27,13 +27,13 @@ const ActionMenu = props => {
         onClose={() => setAnchorEl(null)}
       >
         <MenuItem onClick={() => {
-          props.archieveJournal(props.id)
+          props.archieveJournal(props.id, props.filed, props.archived)
           setAnchorEl(null)
         }}>
           <ListItemIcon>
             <ArchiveIcon />
           </ListItemIcon>
-          <ListItemText primary="Arquivar" inset/>
+          <ListItemText primary={props.filed? "Desarquivar": "Arquivar"} inset/>
         </MenuItem>
         <MenuItem onClick={() => setAnchorEl(null)}>
           <ListItemIcon>

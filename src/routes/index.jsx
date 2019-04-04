@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch, Redirect} from 'react-router-dom'
 import LoginPage from '../pages/login'
+import ArchivedPage from '../pages/archived'
 import DashBoardPage from '../pages/dashboard/'
 
 const PrivateRoute =  ({component:Component, ...rest }) => {
@@ -18,6 +19,7 @@ export default props => (
     <Switch>
         <Route exact path="/login" component={LoginPage} />
         <PrivateRoute path="/dashboard" component={DashBoardPage} />
+        <PrivateRoute path="/archived" component={ArchivedPage} />
         <Redirect from="*" to="/login" />
     </Switch>
 )

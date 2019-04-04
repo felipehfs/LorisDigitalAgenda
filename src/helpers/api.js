@@ -19,8 +19,9 @@ export const readAllJournals = async function() {
   return journals.data
 }
 
-export const archiveJournal = async function(id) {
-  const result = await axios.put(`${uri}/journals/${id}`,{ filed: true})
+export const archiveJournal = async function(id, filed) {
+  console.log(filed)
+  const result = await axios.put(`${uri}/journals/${id}`,{ filed: !filed})
   return result.data
 }
 
@@ -30,6 +31,7 @@ export const removeJournal = async function(id) {
 }
 
 // TODO: returns only the journals archived
-export const onlyArchieveJournals = async function() {
-  
+export const onlyArchiveJournals = async function() {
+  const result = await axios.get(`${uri}/journals/archived`)
+  return result.data
 } 

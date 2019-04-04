@@ -45,7 +45,7 @@ const JournalCard = props => {
           year: "numeric"
         }).format(createdAt)}
         action={
-         <ActionMenu id={props._id} />
+         <ActionMenu id={props._id} filed={props.filed} archived={props.archived} />
         }
       />
       <CardContent>

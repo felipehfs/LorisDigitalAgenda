@@ -7,23 +7,23 @@ import { fetchJournals } from "../../actions/journals";
 import { connect } from "react-redux";
 
 const journalsContainer = props => {
-  React.useEffect(() => {
-      props.fetchJournals()
-  }, [])
-  console.log('journals', typeof props.journals)
   return (
     <div style={{ padding: 5 }}>
       {props.journals.map(el => (
         <Grow style={{ transformOrigin: "0 0 0" }} key={el._id}>
-          <JournalCard {...el} />
+          <JournalCard {...el} archived={props.archived} />
         </Grow>
       ))}
     </div>
   );
 };
 
+journalsContainer.defaultValue = {
+  archived: false
+}
 journalsContainer.propTypes = {
-  journals: PropTypes.array.isRequired
+  journals: PropTypes.array.isRequired,
+  archived: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
