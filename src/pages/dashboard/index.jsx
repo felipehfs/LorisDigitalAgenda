@@ -9,7 +9,7 @@ import JournalContainer from '../../containers/journal/journalsContainer'
 const Dashboard = props => {
     React.useEffect(() => {
         props.fetchJournals()
-    }, [props.journals])
+    }, [])
     return (
         <Header history={props.history}>
            <JournalContainer />

@@ -32,13 +32,18 @@ export const readAllJournals = async function() {
 }
 
 export const archiveJournal = async function(id, filed) {
-  console.log(filed)
+  console.log(!filed)
   const result = await axios.put(`${uri}/journals/${id}`,{ filed: !filed})
   return result.data
 }
 
 export const removeJournal = async function(id) {
   const result = await axios.put(`${uri}/journals/${id}`, { removed: true })
+  return result.data
+}
+
+export const updateJournal = async function(journal) {
+  const result = await axios.put(`${uri}/journals/${journal._id}`, {description: journal.description})
   return result.data
 }
 
@@ -49,5 +54,10 @@ export const onlyArchiveJournals = async function() {
 
 export const newJournal = async function(journal) {
   const result = await axios.post(`${uri}/journals`, journal)
+  return result.data
+}
+
+export const findById = async function(id) {
+  const result = await axios.get(`${uri}/journals/${id}/search`)
   return result.data
 }

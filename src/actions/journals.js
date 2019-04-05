@@ -2,6 +2,7 @@ import { readAllJournals,
   archiveJournal, 
   onlyArchiveJournals,
   newJournal,
+  updateJournal,
   removeJournal as dropJournal
 } from "../helpers/api";
 import { SET_JOURNALS } from "./types";
@@ -22,13 +23,24 @@ export const fetchJournals = () => dispatch => {
 export const archieveJournal = (id, filed) => dispatch => {
   archiveJournal(id, filed)
     .then(resp => {
-      console.log("archieved", filed)
+      if (filed) {
+        dispatch(fetchArchivedJournals())
+      } else {
+        dispatch(fetchJournals())
+      }
     })
     .catch(e => console.error(e));
 };
 
-export const removeJournal =  id => dispatch => {
+export const removeJournal =  (id,filed) => dispatch => {
   dropJournal(id)
+    .then(resp => {
+        if (filed) {
+          dispatch(fetchArchivedJournals())
+        } else {
+          dispatch(fetchJournals())
+        }
+    })
     .catch(err => console.error(err))
 }
 
@@ -42,4 +54,10 @@ export const createJournals = (journals) => dispatch => {
   newJournal(journals)
     .then(resp => console.log("Journal created"))
     .catch(err => console.error(err))
+}
+
+export const changeJournal = journal => dispatch => {
+  updateJournal(journal)
+  .then(resp => console.log("Journal updated"))
+  .catch(err => console.log(err))
 }

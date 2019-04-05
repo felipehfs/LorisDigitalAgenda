@@ -43,7 +43,7 @@ recognition.language = "pt-BR";
 
 const journalForm = props => {
   const { classes } = props;
-  const [description, setDescription] = React.useState("");
+  const [description, setDescription] = React.useState(props.description);
   const [listening, setListening] = React.useState(false);
 
   const toggleListen = () => {

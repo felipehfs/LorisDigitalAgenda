@@ -6,10 +6,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 function ArchievedPage(props) {
-    useEffect(() => props.fetchArchivedJournals(),[props.journals])
+    useEffect(() => props.fetchArchivedJournals(),[])
     return (
         <Header>
-            <JournalContainer archive/>
+            <JournalContainer archive />
         </Header>
     )
 }

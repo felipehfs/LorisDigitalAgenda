@@ -6,6 +6,7 @@ import ArchiveIcon from '@material-ui/icons/Archive'
 import EditIcon from '@material-ui/icons/Edit'
 import { archieveJournal, removeJournal } from '../../actions/journals'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
 const ActionMenu = props => {
@@ -35,14 +36,17 @@ const ActionMenu = props => {
           </ListItemIcon>
           <ListItemText primary={props.filed? "Desarquivar": "Arquivar"} inset/>
         </MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)}>
+        <MenuItem onClick={() => {
+            setAnchorEl(null)
+            props.history.push(`/pages/${props.id}/edit`)
+          }}>
           <ListItemIcon>
             <EditIcon />
           </ListItemIcon>
           <ListItemText primary="Editar" inset />
         </MenuItem>
         <MenuItem onClick={() => {
-          props.removeJournal(props.id)
+          props.removeJournal(props.id, props.filed)
           setAnchorEl(null)
           }}>
           <ListItemIcon>
@@ -56,4 +60,4 @@ const ActionMenu = props => {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({ archieveJournal, removeJournal}, dispatch)
-export default connect(null, mapDispatchToProps)(ActionMenu)
+export default withRouter(connect(null, mapDispatchToProps)(ActionMenu))
