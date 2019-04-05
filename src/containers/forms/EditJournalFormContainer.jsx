@@ -20,6 +20,7 @@ const EditJournalForm = props => {
     <JournalForm
       header="Edição da página"
       description={props.journal.description}
+      stickers={props.journal.stickers}
       handleSubmit={handleSubmit}
     />
   );

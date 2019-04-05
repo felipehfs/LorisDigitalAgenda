@@ -10,9 +10,10 @@ import {
   CircularProgress,
   Tooltip
 } from "@material-ui/core";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import MicIcon from "@material-ui/icons/Mic";
+import ChipInput from 'material-ui-chip-input'
 
 const styles = theme => ({
   paper: {
@@ -29,7 +30,10 @@ const SpeechButton = props => {
     return <CircularProgress color="secondary" onClick={props.handleClick} />;
   }
   return (
-    <Tooltip title="Espere 3 segundos para começar a falar" placement="right-start">
+    <Tooltip
+      title="Espere 3 segundos para começar a falar"
+      placement="right-start"
+    >
       <IconButton onClick={props.handleClick} aria-label="recording">
         <MicIcon />
       </IconButton>
@@ -45,6 +49,7 @@ const journalForm = props => {
   const { classes } = props;
   const [description, setDescription] = React.useState(props.description);
   const [listening, setListening] = React.useState(false);
+  const [stickers, setStickers] = React.useState(props.stickers);
 
   const toggleListen = () => {
     setListening(!listening);
@@ -95,15 +100,25 @@ const journalForm = props => {
             required
           />
         </FormControl>
+        <FormControl margin="normal" fullWidth>
+          <ChipInput label="Tags"
+            defaultValue={stickers}
+            onChange={ e => setStickers(e)}
+           />
+        </FormControl>
         <Grid container justify="space-between">
           <Grid item>
-            <SpeechButton listening={listening} handleClick={toggleListen}/>
+            <SpeechButton listening={listening} handleClick={toggleListen} />
           </Grid>
           <Grid item>
-            <Button color="primary" type="submit" onClick={ e => {
-              e.preventDefault()
-              props.handleSubmit({ description })
-            }}>
+            <Button
+              color="primary"
+              type="submit"
+              onClick={e => {
+                e.preventDefault();
+                props.handleSubmit({ description, stickers });
+              }}
+            >
               Salvar
             </Button>
           </Grid>
@@ -114,12 +129,14 @@ const journalForm = props => {
 };
 
 journalForm.defaultProps = {
-  description: ''
-}
+  description: "",
+  stickers: []
+};
 
 journalForm.propTypes = {
   description: PropTypes.string,
-  header: PropTypes.string.isRequired
-}
+  header: PropTypes.string.isRequired,
+  stickers: PropTypes.array
+};
 
 export default withStyles(styles)(journalForm);

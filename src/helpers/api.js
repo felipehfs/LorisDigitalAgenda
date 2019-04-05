@@ -43,7 +43,7 @@ export const removeJournal = async function(id) {
 }
 
 export const updateJournal = async function(journal) {
-  const result = await axios.put(`${uri}/journals/${journal._id}`, {description: journal.description})
+  const result = await axios.put(`${uri}/journals/${journal._id}`, {description: journal.description, stickers: journal.stickers})
   return result.data
 }
 
