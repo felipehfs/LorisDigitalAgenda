@@ -116,6 +116,7 @@ const journalForm = props => {
               type="submit"
               onClick={e => {
                 e.preventDefault();
+                if (!description) return
                 props.handleSubmit({ description, stickers });
               }}
             >
