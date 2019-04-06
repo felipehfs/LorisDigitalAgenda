@@ -166,7 +166,7 @@ class MiniDrawer extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Nova página" />
             </ListItem>
-            <ListItem button>
+            <ListItem component={RouterLink} button to="/pages/search">
               <ListItemIcon>
                 <SearchIcon />
               </ListItemIcon>

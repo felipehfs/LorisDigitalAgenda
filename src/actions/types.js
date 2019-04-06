@@ -1,1 +1,2 @@
 export const SET_JOURNALS = 'SET_JOURNALS'
+export const FILTER_JOURNALS = 'FILTER_JOURNALS'

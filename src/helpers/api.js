@@ -26,6 +26,7 @@ export const register = function({ email, username, password }) {
   })
 }
 
+// retrieves the journal not achieved
 export const readAllJournals = async function() {
   const journals = await axios.get(`${uri}/journals`)
   return journals.data
@@ -59,5 +60,11 @@ export const newJournal = async function(journal) {
 
 export const findById = async function(id) {
   const result = await axios.get(`${uri}/journals/${id}/search`)
+  return result.data
+}
+
+// returns the archived journals and the unarchived journals
+export const getAllStateJournals = async function() {
+  const result = await axios.get(`${uri}/journals/all`)
   return result.data
 }
