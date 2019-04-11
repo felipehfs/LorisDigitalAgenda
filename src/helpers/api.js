@@ -1,5 +1,5 @@
 import axios from "axios";
-const uri = process.env.API_URI ||"http://localhost:8000/api";
+const uri = process.env.REACT_APP_API_URI ||"http://localhost:8000/api";
 
 export const login = function({ email, password }) {
   return new Promise((resolve, reject) => {

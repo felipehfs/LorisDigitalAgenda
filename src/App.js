@@ -30,7 +30,7 @@ class App extends Component {
         <Provider store={mainStore}>
         <CssBaseline>
           <MuiThemeProvider theme={theme}>
-            <BrowserRouter>
+            <BrowserRouter basename="/LorisDigitalAgenda">
               <Routes />
             </BrowserRouter>
           </MuiThemeProvider>
